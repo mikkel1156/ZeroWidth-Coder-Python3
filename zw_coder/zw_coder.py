@@ -6,8 +6,9 @@ ZERO_WIDTH_NOBREAK_SPACE = "⁠"
 
 def encode(sec, msg=None):
     #   Convert message to binary, keeping leading zeros.
-    secBin = ' '.join(['{0:08b}'.format(ord(x)) for x in sec])
-
+    secBin = ' '.join(["{0:b}".format(ord(x)) for x in sec])
+    print(secBin)
+    
     #   Set the start of the encoded message.
     secZeroWidth = ZERO_WIDTH_NOBREAK_SPACE
     for bin in secBin.split(" "):
@@ -57,6 +58,6 @@ def decode(msg):
     try:
         #   Convert the binary message into a string and return it.
         return ''.join([chr(int(x, 2)) for x in secBin[:len(secBin)-1].split(" ")])
-    except Exception as e:
+    except Exception:
         print("An error has occured. Maybe no zero-width characters were found.")
         exit()
